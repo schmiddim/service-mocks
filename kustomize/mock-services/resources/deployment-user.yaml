@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: user
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: user
+#    todo: later
+#    decMgmtRequires-a-name: "mysql"
+#    decMgmtRequires-a-config-map-ref: "userDatabaseConfig"
+
+  name: user
+  namespace: user
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user
+
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+      - image: schmiddim/service-mock-user-service:c882339842dc99253bcbec6703b5e882cc4e4347
+#        imagePullPolicy: Never
+        name: user-service
+        env:
+          - name: MYSQL_DATABASE_USER
+            value: "root"
+          - name: MYSQL_DATABASE_PASSWORD
+            value: "password"
+          - name: MYSQL_DATABASE_DB
+            value: "mydb"
+          - name: MYSQL_DATABASE_HOST
+            value: "mysql.db"
+        livenessProbe:
+          httpGet:
+            path: /liveness
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    decMgmtProvides: userService
+    decMgmtVersion: "1.0.0"
+    app: user
+  name: user
+  namespace: user
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: user
+  type: ClusterIP
+
