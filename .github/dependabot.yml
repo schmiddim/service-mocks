@@ -5,6 +5,13 @@
 
 version: 2
 updates:
+  - package-ecosystem: docker
+    directories:
+      - services/homepage-service
+      - services/rbac-service
+      - services/user-service
+    schedule:
+      interval: daily
   - package-ecosystem: "pip" # See documentation for possible values
 
     directories:
