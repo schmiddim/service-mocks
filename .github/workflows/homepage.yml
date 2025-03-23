@@ -37,6 +37,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: services/homepage-service/Dockerfile
           push: true
           tags: |
             schmiddim/service-mock-homepage-service:${{ env.ref }}
