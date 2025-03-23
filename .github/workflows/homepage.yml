@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'services/homepage-service/**'
 jobs:
   build_and_test:
     name: Build & Test the Homepage Service
