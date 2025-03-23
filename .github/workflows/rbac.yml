@@ -5,7 +5,7 @@ on:
       - master
 jobs:
   build_and_test:
-    name: Build & Test the Application
+    name: Build & Test the RBAC Service
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
