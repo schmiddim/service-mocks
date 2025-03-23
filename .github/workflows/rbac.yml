@@ -36,8 +36,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
           push: true
+          context: services/rbac-service
           file: services/rbac-service/Dockerfile
           tags: |
             schmiddim/service-mock-rbac-service:${{ env.ref }}
