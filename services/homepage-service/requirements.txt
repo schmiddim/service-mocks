@@ -1,4 +1,4 @@
-certifi==2026.1.4
+certifi==2026.2.25
 chardet==6.0.0.post1
 click==8.3.1
 Flask==3.1.3
