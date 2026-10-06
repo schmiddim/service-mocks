@@ -8,4 +8,4 @@ MarkupSafe==3.0.4
 PyMySQL==1.2.3
 python-dotenv==1.2.4
 Werkzeug==3.1.9
-zipp==4.1.0
+zipp==4.1.1
